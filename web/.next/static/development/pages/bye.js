@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\register.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\bye.js"],{
 
 /***/ "./components/Header.tsx":
 /*!*******************************!*\
@@ -9270,23 +9270,23 @@ var assign=Object.assign.bind(Object);function g(){return assign;}Object.defineP
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cregister.tsx&hotRouterUpdates=true!./":
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cregister.tsx&hotRouterUpdates=true ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fbye&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cbye.tsx&hotRouterUpdates=true!./":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fbye&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cbye.tsx&hotRouterUpdates=true ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
     (window.__NEXT_P = window.__NEXT_P || []).push([
-      "/register",
+      "/bye",
       function () {
-        var mod = __webpack_require__(/*! ./pages/register.tsx */ "./pages/register.tsx");
+        var mod = __webpack_require__(/*! ./pages/bye.tsx */ "./pages/bye.tsx");
         if (true) {
-          module.hot.accept(/*! ./pages/register.tsx */ "./pages/register.tsx", function () {
-            if (!next.router.components["/register"]) return;
-            var updatedPage = __webpack_require__(/*! ./pages/register.tsx */ "./pages/register.tsx");
-            next.router.update("/register", updatedPage);
+          module.hot.accept(/*! ./pages/bye.tsx */ "./pages/bye.tsx", function () {
+            if (!next.router.components["/bye"]) return;
+            var updatedPage = __webpack_require__(/*! ./pages/bye.tsx */ "./pages/bye.tsx");
+            next.router.update("/bye", updatedPage);
           });
         }
         return mod;
@@ -15454,151 +15454,114 @@ if (hasSymbols()) {
 
 /***/ }),
 
-/***/ "./pages/register.tsx":
-/*!****************************!*\
-  !*** ./pages/register.tsx ***!
-  \****************************/
+/***/ "./pages/bye.tsx":
+/*!***********************!*\
+  !*** ./pages/bye.tsx ***!
+  \***********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _generated_graphql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../generated/graphql */ "./generated/graphql.tsx");
-/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.tsx");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _generated_graphql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../generated/graphql */ "./generated/graphql.tsx");
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.tsx");
 var _this = undefined,
-    _jsxFileName = "C:\\Users\\E072894\\Documents\\repos\\nodejs\\nextjs_repos\\ssr_refresh_token\\web\\pages\\register.tsx";
+    _jsxFileName = "C:\\Users\\E072894\\Documents\\repos\\nodejs\\nextjs_repos\\ssr_refresh_token\\web\\pages\\bye.tsx";
 
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
-
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
-      email = _useState[0],
-      setEmail = _useState[1];
+  var _useByeQuery = Object(_generated_graphql__WEBPACK_IMPORTED_MODULE_1__["useByeQuery"])(),
+      data = _useByeQuery.data,
+      loading = _useByeQuery.loading,
+      error = _useByeQuery.error;
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
-      password = _useState2[0],
-      setPassword = _useState2[1];
+  if (loading) {
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10,
+        columnNumber: 7
+      }
+    }, __jsx("div", {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11,
+        columnNumber: 9
+      }
+    }, "loading..."));
+  }
 
-  var _useRegisterMutation = Object(_generated_graphql__WEBPACK_IMPORTED_MODULE_3__["useRegisterMutation"])(),
-      _useRegisterMutation2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useRegisterMutation, 1),
-      register = _useRegisterMutation2[0];
+  if (error) {
+    console.log(error);
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19,
+        columnNumber: 7
+      }
+    }, __jsx("div", {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20,
+        columnNumber: 9
+      }
+    }, "err"));
+  }
 
-  return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  if (!data) {
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27,
+        columnNumber: 7
+      }
+    }, __jsx("div", {
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 28,
+        columnNumber: 9
+      }
+    }, "no data"));
+  }
+
+  return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12,
+      lineNumber: 34,
       columnNumber: 5
-    }
-  }, __jsx("form", {
-    onSubmit: function _callee(e) {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault();
-              console.log("form submitted");
-              _context.next = 4;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(register({
-                variables: {
-                  email: email,
-                  password: password
-                }
-              }));
-
-            case 4:
-              response = _context.sent;
-              console.log(response);
-              next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push("/");
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, null, null, Promise);
-    },
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13,
-      columnNumber: 7
     }
   }, __jsx("div", {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 9
+      lineNumber: 35,
+      columnNumber: 7
     }
-  }, __jsx("input", {
-    value: email,
-    placeholder: "email",
-    onChange: function onChange(e) {
-      setEmail(e.target.value);
-    },
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 11
-    }
-  })), __jsx("div", {
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38,
-      columnNumber: 9
-    }
-  }, __jsx("input", {
-    type: "password",
-    value: password,
-    placeholder: "password",
-    onChange: function onChange(e) {
-      setPassword(e.target.value);
-    },
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 11
-    }
-  })), __jsx("button", {
-    type: "submit",
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48,
-      columnNumber: 9
-    }
-  }, "register")));
+  }, data.bye));
 });
 
 /***/ }),
 
-/***/ 2:
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cregister.tsx&hotRouterUpdates=true ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ 3:
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fbye&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cbye.tsx&hotRouterUpdates=true ***!
+  \********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cregister.tsx&hotRouterUpdates=true! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cregister.tsx&hotRouterUpdates=true!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fbye&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cbye.tsx&hotRouterUpdates=true! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fbye&absolutePagePath=C%3A%5CUsers%5CE072894%5CDocuments%5Crepos%5Cnodejs%5Cnextjs_repos%5Cssr_refresh_token%5Cweb%5Cpages%5Cbye.tsx&hotRouterUpdates=true!./");
 
 
 /***/ }),
@@ -15614,5 +15577,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=register.js.map
+},[[3,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=bye.js.map

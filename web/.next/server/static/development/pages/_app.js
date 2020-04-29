@@ -171,6 +171,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link_error__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_error__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-link */ "apollo-link");
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_link__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! cookie */ "cookie");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_12__);
 var _jsxFileName = "C:\\Users\\E072894\\Documents\\repos\\nodejs\\nextjs_repos\\ssr_refresh_token\\web\\lib\\apollo.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -198,6 +200,9 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+ // one way to check if we are on the server or not, is to check the window.
+
+const isServer = () => true;
 /**
  * Creates and provides the apolloContext
  * to a next.js PageTree. Use it by wrapping
@@ -207,15 +212,21 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
  * @param {Boolean} [config.ssr=true]
  */
 
+
 function withApollo(PageComponent, {
   ssr = true
 } = {}) {
   const WithApollo = (_ref) => {
     let {
       apolloClient,
+      serverAccessToken,
       apolloState
     } = _ref,
-        pageProps = _objectWithoutProperties(_ref, ["apolloClient", "apolloState"]);
+        pageProps = _objectWithoutProperties(_ref, ["apolloClient", "serverAccessToken", "apolloState"]);
+
+    if (!isServer() && !Object(_accessToken__WEBPACK_IMPORTED_MODULE_9__["getAccessToken"])()) {
+      Object(_accessToken__WEBPACK_IMPORTED_MODULE_9__["setAccessToken"])(serverAccessToken);
+    }
 
     const client = apolloClient || initApolloClient(apolloState);
     return __jsx(PageComponent, _extends({}, pageProps, {
@@ -223,7 +234,7 @@ function withApollo(PageComponent, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25,
+        lineNumber: 32,
         columnNumber: 12
       }
     }));
@@ -246,12 +257,30 @@ function withApollo(PageComponent, {
       const {
         AppTree,
         ctx: {
+          req,
           res
         }
-      } = ctx; // Run all GraphQL queries in the component tree
+      } = ctx;
+      let serverAccessToken = '';
+
+      if (isServer()) {
+        const cookies = cookie__WEBPACK_IMPORTED_MODULE_12___default.a.parse(req.headers.cookie);
+
+        if (cookies.jid) {
+          const data = await isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_6___default()('http://localhost:4000/refresh_token', {
+            method: 'post',
+            credentials: 'include',
+            headers: {
+              cookie: `jid=${cookies.jid}`
+            }
+          }).then(res => res.json());
+          serverAccessToken = data.accessToken;
+        }
+      } // Run all GraphQL queries in the component tree
       // and extract the resulting data
 
-      const apolloClient = ctx.ctx.apolloClient = initApolloClient({});
+
+      const apolloClient = ctx.ctx.apolloClient = initApolloClient({}, serverAccessToken);
       const pageProps = PageComponent.getInitialProps ? await PageComponent.getInitialProps(ctx) : {}; // Only on the server
 
       if (true) {
@@ -275,7 +304,7 @@ function withApollo(PageComponent, {
               __self: this,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 69,
+                lineNumber: 93,
                 columnNumber: 15
               }
             }));
@@ -293,9 +322,11 @@ function withApollo(PageComponent, {
       } // Extract query data from the Apollo store
 
 
-      const apolloState = apolloClient.cache.extract();
+      const apolloState = apolloClient.cache.extract(); // Everything that is return here, is going to be sent to the browser
+
       return _objectSpread({}, pageProps, {
-        apolloState
+        apolloState,
+        serverAccessToken
       });
     };
   }
@@ -308,11 +339,11 @@ let apolloClient = null;
  * Creates or reuses apollo client in the browser.
  */
 
-function initApolloClient(initState) {
+function initApolloClient(initState, serverAccessToken) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (true) {
-    return createApolloClient(initState);
+  if (isServer()) {
+    return createApolloClient(initState, serverAccessToken);
   } // Reuse client on the client-side
 
 
@@ -330,7 +361,7 @@ function initApolloClient(initState) {
  */
 
 
-function createApolloClient(initialState = {}) {
+function createApolloClient(initialState = {}, serverAccessToken) {
   const httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_4__["HttpLink"]({
     uri: 'http://localhost:4000/graphql',
     credentials: 'include',
@@ -376,7 +407,7 @@ function createApolloClient(initialState = {}) {
   const authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_5__["setContext"])((_request, {
     headers
   }) => {
-    const token = Object(_accessToken__WEBPACK_IMPORTED_MODULE_9__["getAccessToken"])();
+    const token = isServer() ? serverAccessToken : Object(_accessToken__WEBPACK_IMPORTED_MODULE_9__["getAccessToken"])();
     return {
       headers: _objectSpread({}, headers, {
         authorization: token ? `bearer ${token}` : ''
@@ -730,6 +761,17 @@ module.exports = require("apollo-link-http");
 /***/ (function(module, exports) {
 
 module.exports = require("apollo-link-token-refresh");
+
+/***/ }),
+
+/***/ "cookie":
+/*!*************************!*\
+  !*** external "cookie" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("cookie");
 
 /***/ }),
 

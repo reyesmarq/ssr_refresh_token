@@ -1,5 +1,215 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\_app.js"],{
 
+/***/ "../../../../../../node_modules/cookie/index.js":
+/*!*****************************************************!*\
+  !*** C:/Users/E072894/node_modules/cookie/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module exports.
+ * @public
+ */
+
+exports.parse = parse;
+exports.serialize = serialize;
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var decode = decodeURIComponent;
+var encode = encodeURIComponent;
+var pairSplitRegExp = /; */;
+
+/**
+ * RegExp to match field-content in RFC 7230 sec 3.2
+ *
+ * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
+ * field-vchar   = VCHAR / obs-text
+ * obs-text      = %x80-FF
+ */
+
+var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
+
+/**
+ * Parse a cookie header.
+ *
+ * Parse the given cookie header string into an object
+ * The object has the various cookies as keys(names) => values
+ *
+ * @param {string} str
+ * @param {object} [options]
+ * @return {object}
+ * @public
+ */
+
+function parse(str, options) {
+  if (typeof str !== 'string') {
+    throw new TypeError('argument str must be a string');
+  }
+
+  var obj = {}
+  var opt = options || {};
+  var pairs = str.split(pairSplitRegExp);
+  var dec = opt.decode || decode;
+
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i];
+    var eq_idx = pair.indexOf('=');
+
+    // skip things that don't look like key=value
+    if (eq_idx < 0) {
+      continue;
+    }
+
+    var key = pair.substr(0, eq_idx).trim()
+    var val = pair.substr(++eq_idx, pair.length).trim();
+
+    // quoted values
+    if ('"' == val[0]) {
+      val = val.slice(1, -1);
+    }
+
+    // only assign once
+    if (undefined == obj[key]) {
+      obj[key] = tryDecode(val, dec);
+    }
+  }
+
+  return obj;
+}
+
+/**
+ * Serialize data into a cookie header.
+ *
+ * Serialize the a name value pair into a cookie string suitable for
+ * http headers. An optional options object specified cookie parameters.
+ *
+ * serialize('foo', 'bar', { httpOnly: true })
+ *   => "foo=bar; httpOnly"
+ *
+ * @param {string} name
+ * @param {string} val
+ * @param {object} [options]
+ * @return {string}
+ * @public
+ */
+
+function serialize(name, val, options) {
+  var opt = options || {};
+  var enc = opt.encode || encode;
+
+  if (typeof enc !== 'function') {
+    throw new TypeError('option encode is invalid');
+  }
+
+  if (!fieldContentRegExp.test(name)) {
+    throw new TypeError('argument name is invalid');
+  }
+
+  var value = enc(val);
+
+  if (value && !fieldContentRegExp.test(value)) {
+    throw new TypeError('argument val is invalid');
+  }
+
+  var str = name + '=' + value;
+
+  if (null != opt.maxAge) {
+    var maxAge = opt.maxAge - 0;
+    if (isNaN(maxAge)) throw new Error('maxAge should be a Number');
+    str += '; Max-Age=' + Math.floor(maxAge);
+  }
+
+  if (opt.domain) {
+    if (!fieldContentRegExp.test(opt.domain)) {
+      throw new TypeError('option domain is invalid');
+    }
+
+    str += '; Domain=' + opt.domain;
+  }
+
+  if (opt.path) {
+    if (!fieldContentRegExp.test(opt.path)) {
+      throw new TypeError('option path is invalid');
+    }
+
+    str += '; Path=' + opt.path;
+  }
+
+  if (opt.expires) {
+    if (typeof opt.expires.toUTCString !== 'function') {
+      throw new TypeError('option expires is invalid');
+    }
+
+    str += '; Expires=' + opt.expires.toUTCString();
+  }
+
+  if (opt.httpOnly) {
+    str += '; HttpOnly';
+  }
+
+  if (opt.secure) {
+    str += '; Secure';
+  }
+
+  if (opt.sameSite) {
+    var sameSite = typeof opt.sameSite === 'string'
+      ? opt.sameSite.toLowerCase() : opt.sameSite;
+
+    switch (sameSite) {
+      case true:
+        str += '; SameSite=Strict';
+        break;
+      case 'lax':
+        str += '; SameSite=Lax';
+        break;
+      case 'strict':
+        str += '; SameSite=Strict';
+        break;
+      case 'none':
+        str += '; SameSite=None';
+        break;
+      default:
+        throw new TypeError('option sameSite is invalid');
+    }
+  }
+
+  return str;
+}
+
+/**
+ * Try decoding a string using a decoding function.
+ *
+ * @param {string} str
+ * @param {function} decode
+ * @private
+ */
+
+function tryDecode(str, decode) {
+  try {
+    return decode(str);
+  } catch (e) {
+    return str;
+  }
+}
+
+
+/***/ }),
+
 /***/ "./lib/accessToken.ts":
 /*!****************************!*\
   !*** ./lib/accessToken.ts ***!
@@ -52,6 +262,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _accessToken__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./accessToken */ "./lib/accessToken.ts");
 /* harmony import */ var apollo_link_error__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! apollo-link-error */ "./node_modules/apollo-link-error/lib/bundle.esm.js");
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! cookie */ "../../../../../../node_modules/cookie/index.js");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_16__);
 
 
 
@@ -75,6 +287,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+ // one way to check if we are on the server or not, is to check the window.
+
+var isServer = function isServer() {
+  return false;
+};
 /**
  * Creates and provides the apolloContext
  * to a next.js PageTree. Use it by wrapping
@@ -83,6 +300,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @param {Object} [config]
  * @param {Boolean} [config.ssr=true]
  */
+
 
 function withApollo(PageComponent) {
   var _this = this;
@@ -93,8 +311,13 @@ function withApollo(PageComponent) {
 
   var WithApollo = function WithApollo(_ref2) {
     var apolloClient = _ref2.apolloClient,
+        serverAccessToken = _ref2.serverAccessToken,
         apolloState = _ref2.apolloState,
-        pageProps = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_3__["default"])(_ref2, ["apolloClient", "apolloState"]);
+        pageProps = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_3__["default"])(_ref2, ["apolloClient", "serverAccessToken", "apolloState"]);
+
+    if (!isServer() && !Object(_accessToken__WEBPACK_IMPORTED_MODULE_13__["getAccessToken"])()) {
+      Object(_accessToken__WEBPACK_IMPORTED_MODULE_13__["setAccessToken"])(serverAccessToken);
+    }
 
     var client = apolloClient || initApolloClient(apolloState);
     return __jsx(PageComponent, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, pageProps, {
@@ -102,7 +325,7 @@ function withApollo(PageComponent) {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25,
+        lineNumber: 32,
         columnNumber: 12
       }
     }));
@@ -122,62 +345,92 @@ function withApollo(PageComponent) {
 
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = function _callee(ctx) {
-      var AppTree, res, apolloClient, pageProps, _await$import, getDataFromTree, apolloState;
+      var AppTree, _ctx$ctx, req, res, serverAccessToken, cookies, data, apolloClient, pageProps, _await$import, getDataFromTree, apolloState;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              AppTree = ctx.AppTree, res = ctx.ctx.res; // Run all GraphQL queries in the component tree
-              // and extract the resulting data
+              AppTree = ctx.AppTree, _ctx$ctx = ctx.ctx, req = _ctx$ctx.req, res = _ctx$ctx.res;
+              serverAccessToken = '';
 
-              apolloClient = ctx.ctx.apolloClient = initApolloClient({});
-
-              if (!PageComponent.getInitialProps) {
-                _context.next = 8;
+              if (!isServer()) {
+                _context.next = 9;
                 break;
               }
 
-              _context.next = 5;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(PageComponent.getInitialProps(ctx));
+              cookies = cookie__WEBPACK_IMPORTED_MODULE_16___default.a.parse(req.headers.cookie);
 
-            case 5:
-              _context.t0 = _context.sent;
-              _context.next = 9;
-              break;
+              if (!cookies.jid) {
+                _context.next = 9;
+                break;
+              }
 
-            case 8:
-              _context.t0 = {};
+              _context.next = 7;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_10___default()('http://localhost:4000/refresh_token', {
+                method: 'post',
+                credentials: 'include',
+                headers: {
+                  cookie: "jid=".concat(cookies.jid)
+                }
+              }).then(function (res) {
+                return res.json();
+              }));
+
+            case 7:
+              data = _context.sent;
+              serverAccessToken = data.accessToken;
 
             case 9:
+              // Run all GraphQL queries in the component tree
+              // and extract the resulting data
+              apolloClient = ctx.ctx.apolloClient = initApolloClient({}, serverAccessToken);
+
+              if (!PageComponent.getInitialProps) {
+                _context.next = 16;
+                break;
+              }
+
+              _context.next = 13;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(PageComponent.getInitialProps(ctx));
+
+            case 13:
+              _context.t0 = _context.sent;
+              _context.next = 17;
+              break;
+
+            case 16:
+              _context.t0 = {};
+
+            case 17:
               pageProps = _context.t0;
 
               if (true) {
-                _context.next = 27;
+                _context.next = 35;
                 break;
               }
 
               if (!(res && res.finished)) {
-                _context.next = 13;
+                _context.next = 21;
                 break;
               }
 
               return _context.abrupt("return", {});
 
-            case 13:
+            case 21:
               if (!ssr) {
-                _context.next = 26;
+                _context.next = 34;
                 break;
               }
 
-              _context.prev = 14;
-              _context.next = 17;
+              _context.prev = 22;
+              _context.next = 25;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! @apollo/react-ssr */ "./node_modules/@apollo/react-ssr/lib/react-ssr.esm.js")));
 
-            case 17:
+            case 25:
               _await$import = _context.sent;
               getDataFromTree = _await$import.getDataFromTree;
-              _context.next = 21;
+              _context.next = 29;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(getDataFromTree(__jsx(AppTree, {
                 pageProps: _objectSpread({}, pageProps, {
                   apolloClient: apolloClient
@@ -186,41 +439,43 @@ function withApollo(PageComponent) {
                 __self: _this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 69,
+                  lineNumber: 93,
                   columnNumber: 15
                 }
               })));
 
-            case 21:
-              _context.next = 26;
+            case 29:
+              _context.next = 34;
               break;
 
-            case 23:
-              _context.prev = 23;
-              _context.t1 = _context["catch"](14);
+            case 31:
+              _context.prev = 31;
+              _context.t1 = _context["catch"](22);
               // Prevent Apollo Client GraphQL errors from crashing SSR.
               // Handle them in components via the data.error prop:
               // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
               console.error('Error while running `getDataFromTree`', _context.t1);
 
-            case 26:
+            case 34:
               // getDataFromTree does not call componentWillUnmount
               // head side effect therefore need to be cleared manually
               next_head__WEBPACK_IMPORTED_MODULE_5___default.a.rewind();
 
-            case 27:
+            case 35:
               // Extract query data from the Apollo store
-              apolloState = apolloClient.cache.extract();
+              apolloState = apolloClient.cache.extract(); // Everything that is return here, is going to be sent to the browser
+
               return _context.abrupt("return", _objectSpread({}, pageProps, {
-                apolloState: apolloState
+                apolloState: apolloState,
+                serverAccessToken: serverAccessToken
               }));
 
-            case 29:
+            case 37:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[14, 23]], Promise);
+      }, null, null, [[22, 31]], Promise);
     };
   }
 
@@ -232,10 +487,12 @@ var apolloClient = null;
  * Creates or reuses apollo client in the browser.
  */
 
-function initApolloClient(initState) {
+function initApolloClient(initState, serverAccessToken) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (false) {} // Reuse client on the client-side
+  if (isServer()) {
+    return createApolloClient(initState, serverAccessToken);
+  } // Reuse client on the client-side
 
 
   if (!apolloClient) {
@@ -254,6 +511,7 @@ function initApolloClient(initState) {
 
 function createApolloClient() {
   var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var serverAccessToken = arguments.length > 1 ? arguments[1] : undefined;
   var httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_8__["HttpLink"]({
     uri: 'http://localhost:4000/graphql',
     credentials: 'include',
@@ -297,7 +555,7 @@ function createApolloClient() {
   });
   var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_9__["setContext"])(function (_request, _ref3) {
     var headers = _ref3.headers;
-    var token = Object(_accessToken__WEBPACK_IMPORTED_MODULE_13__["getAccessToken"])();
+    var token = isServer() ? serverAccessToken : Object(_accessToken__WEBPACK_IMPORTED_MODULE_13__["getAccessToken"])();
     return {
       headers: _objectSpread({}, headers, {
         authorization: token ? "bearer ".concat(token) : ''

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2280,10 +2280,10 @@ module.exports = _typeof;
 
 /***/ }),
 
-/***/ "./pages/register.tsx":
-/*!****************************!*\
-  !*** ./pages/register.tsx ***!
-  \****************************/
+/***/ "./pages/index.tsx":
+/*!*************************!*\
+  !*** ./pages/index.tsx ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2293,111 +2293,87 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _generated_graphql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../generated/graphql */ "./generated/graphql.tsx");
 /* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.tsx");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "C:\\Users\\E072894\\Documents\\repos\\nodejs\\nextjs_repos\\ssr_refresh_token\\web\\pages\\register.tsx";
-
+var _jsxFileName = "C:\\Users\\E072894\\Documents\\repos\\nodejs\\nextjs_repos\\ssr_refresh_token\\web\\pages\\index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   const {
-    0: email,
-    1: setEmail
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: password,
-    1: setPassword
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const [register] = Object(_generated_graphql__WEBPACK_IMPORTED_MODULE_1__["useRegisterMutation"])();
+    data
+  } = Object(_generated_graphql__WEBPACK_IMPORTED_MODULE_1__["useUsersQuery"])({
+    fetchPolicy: 'network-only'
+  });
+
+  if (!data) {
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10,
+        columnNumber: 7
+      }
+    }, __jsx("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11,
+        columnNumber: 9
+      }
+    }, "loading..."));
+  }
+
   return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12,
+      lineNumber: 17,
       columnNumber: 5
     }
-  }, __jsx("form", {
-    onSubmit: async e => {
-      e.preventDefault();
-      console.log("form submitted");
-      const response = await register({
-        variables: {
-          email,
-          password
-        }
-      });
-      console.log(response);
-      next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push("/");
-    },
+  }, __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13,
+      lineNumber: 18,
       columnNumber: 7
     }
   }, __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29,
+      lineNumber: 19,
       columnNumber: 9
     }
-  }, __jsx("input", {
-    value: email,
-    placeholder: "email",
-    onChange: e => {
-      setEmail(e.target.value);
-    },
+  }, "users:"), __jsx("ul", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 11
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38,
+      lineNumber: 20,
       columnNumber: 9
     }
-  }, __jsx("input", {
-    type: "password",
-    value: password,
-    placeholder: "password",
-    onChange: e => {
-      setPassword(e.target.value);
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 11
-    }
-  })), __jsx("button", {
-    type: "submit",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48,
-      columnNumber: 9
-    }
-  }, "register")));
+  }, data.users.map(x => {
+    return __jsx("li", {
+      key: x.id,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 23,
+        columnNumber: 15
+      }
+    }, x.email, ", ", x.id);
+  }))));
 });
 
 /***/ }),
 
-/***/ 4:
-/*!**********************************!*\
-  !*** multi ./pages/register.tsx ***!
-  \**********************************/
+/***/ 3:
+/*!*******************************!*\
+  !*** multi ./pages/index.tsx ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\E072894\Documents\repos\nodejs\nextjs_repos\ssr_refresh_token\web\pages\register.tsx */"./pages/register.tsx");
+module.exports = __webpack_require__(/*! C:\Users\E072894\Documents\repos\nodejs\nextjs_repos\ssr_refresh_token\web\pages\index.tsx */"./pages/index.tsx");
 
 
 /***/ }),
@@ -2432,17 +2408,6 @@ module.exports = require("graphql-tag");
 /***/ (function(module, exports) {
 
 module.exports = require("next/head");
-
-/***/ }),
-
-/***/ "next/router":
-/*!******************************!*\
-  !*** external "next/router" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("next/router");
 
 /***/ }),
 
@@ -2502,4 +2467,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=register.js.map
+//# sourceMappingURL=index.js.map
